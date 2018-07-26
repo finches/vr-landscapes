@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>vr landscapes</title>
+    <meta name="description" content="vr landscapes">
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene id="scene">
+      <!--Campsite-->
+      <a-box color="brown" depth="0.5" height="0.5" width="0.5" position="-1.7 0 -1.7"></a-box>
+      <a-entity light="color: #ff5100; intensity: 3; type: point; distance: 25; decay: 4" position="-1.7 0.6 -1.7"></a-entity>
+      <a-plane color="red" height="5" width="5" rotation="-90 0 0" position="0 0.1 0" shadow></a-plane>
+
+      <!--Base Elements-->
+      <a-sky color="#2d313d"></a-sky>
+      <a-plane color="#088904" height="100" width="100" rotation="-90 0 0" shadow="cast: false"></a-plane>
+      <!-- <a-entity light="color: #fff500; intensity: 0.3; type: ambient" position="-1 7.5 7.5"></a-entity> -->
+    </a-scene>
+
+    <script>
+      for(var i = 0; i < 600; i++){
+        let x = Math.floor(Math.random() * 50) - 25;
+        let z = Math.floor(Math.random() * 50) - 25;
+
+        // skip if it ends up in the "safe area"
+        if(x <= 2.5 && x >= -2.5 && z <= 2.5 && z >= -2.5) continue;
+        
+        let newCyl = document.createElement('a-cylinder');
+        newCyl.setAttribute('color', '#06d100');
+        newCyl.setAttribute('scale', '0.1 15 0.1');
+        newCyl.setAttribute('position', x.toString() + ' 7 ' + z.toString());
+        newCyl.setAttribute('shadow', true);
+
+        // Append our new element
+        let scene = document.getElementById('scene');
+        scene.appendChild(newCyl);
+      }
+    </script>
+  </body>
+</html>
